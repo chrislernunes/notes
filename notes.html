@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes — Minimal</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
   <style>
     :root {
       --bg: #fafafa;
@@ -46,7 +49,11 @@
       --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -58,7 +65,10 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    .app { display: flex; height: 100vh; }
+    .app {
+      display: flex;
+      height: 100vh;
+    }
 
     .sidebar {
       width: 300px;
@@ -85,14 +95,23 @@
     }
 
     .logo-icon {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: var(--accent);
       color: var(--bg);
       flex-shrink: 0;
+      overflow: hidden;
     }
-    .logo-icon svg { width: 18px; height: 18px; display: block; }
+
+    .logo-icon svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
 
     .watermark {
       padding: 14px 20px 16px;
@@ -124,11 +143,23 @@
       transition: all 0.2s ease;
       z-index: 50;
     }
-    .fab:hover { transform: translateY(-2px) scale(1.03); }
-    .fab:active { transform: translateY(0) scale(0.98); }
-    .fab svg { width: 22px; height: 22px; }
 
-    .search-box { padding: 0 16px 16px; }
+    .fab:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .fab:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .fab svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .search-box {
+      padding: 0 16px 16px;
+    }
 
     .search-input {
       width: 100%;
@@ -144,7 +175,11 @@
       background-repeat: no-repeat;
       background-position: 12px center;
     }
-    .search-input::placeholder { color: var(--text-tertiary); }
+
+    .search-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
     .search-input:focus {
       border-color: var(--text-secondary);
       box-shadow: 0 0 0 3px var(--accent-soft);
@@ -155,8 +190,15 @@
       overflow-y: auto;
       padding: 0 10px 8px;
     }
-    .notes-list::-webkit-scrollbar { width: 6px; }
-    .notes-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .notes-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .notes-list::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
 
     .note-item {
       padding: 14px 14px 14px 18px;
@@ -166,20 +208,28 @@
       border: 1px solid transparent;
       position: relative;
     }
-    .note-item:hover { background: var(--hover); }
+
+    .note-item:hover {
+      background: var(--hover);
+    }
+
     .note-item.active {
       background: var(--card-bg);
       border-color: var(--border);
       box-shadow: var(--shadow);
     }
+
     .note-item::before {
       content: '';
       position: absolute;
-      left: 6px; top: 14px; bottom: 14px;
+      left: 6px;
+      top: 14px;
+      bottom: 14px;
       width: 4px;
       border-radius: 4px;
       background: transparent;
     }
+
     .note-item.color-red::before { background: #ef4444; }
     .note-item.color-orange::before { background: #f97316; }
     .note-item.color-yellow::before { background: #eab308; }
@@ -187,14 +237,19 @@
     .note-item.color-blue::before { background: #3b82f6; }
     .note-item.color-purple::before { background: #a855f7; }
     .note-item.color-pink::before { background: #ec4899; }
+
     .note-item.pinned::after {
       content: '📌';
       position: absolute;
-      right: 14px; top: 14px;
+      right: 14px;
+      top: 14px;
       font-size: 12px;
       opacity: 0.72;
     }
-    .note-item.pinned .note-title { padding-right: 24px; }
+
+    .note-item.pinned .note-title {
+      padding-right: 24px;
+    }
 
     .note-title {
       font-size: 14px;
@@ -204,6 +259,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .note-preview {
       font-size: 12.5px;
       color: var(--text-secondary);
@@ -214,6 +270,7 @@
       overflow: hidden;
       margin-bottom: 6px;
     }
+
     .note-meta {
       font-size: 11.5px;
       color: var(--text-tertiary);
@@ -250,7 +307,10 @@
       font-family: inherit;
       line-height: 1.3;
     }
-    .editor-title::placeholder { color: var(--text-tertiary); }
+
+    .editor-title::placeholder {
+      color: var(--text-tertiary);
+    }
 
     .editor-actions {
       display: flex;
@@ -260,17 +320,30 @@
       position: relative;
     }
 
-    .icon-btn, .theme-toggle {
-      width: 36px; height: 36px;
+    .icon-btn,
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: var(--card-bg);
       color: var(--text-secondary);
       cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .icon-btn:hover, .theme-toggle:hover { background: var(--hover); color: var(--text-primary); }
-    .icon-btn.pinned { background: var(--accent-soft); color: var(--text-primary); }
+
+    .icon-btn:hover,
+    .theme-toggle:hover {
+      background: var(--hover);
+      color: var(--text-primary);
+    }
+
+    .icon-btn.pinned {
+      background: var(--accent-soft);
+      color: var(--text-primary);
+    }
 
     .dropdown {
       position: absolute;
@@ -285,7 +358,10 @@
       z-index: 100;
       display: none;
     }
-    .dropdown.open { display: block; }
+
+    .dropdown.open {
+      display: block;
+    }
 
     .dropdown-item {
       display: flex;
@@ -302,12 +378,30 @@
       text-align: left;
       font-family: inherit;
     }
-    .dropdown-item:hover { background: var(--hover); }
-    .dropdown-item.danger { color: var(--danger); }
-    .dropdown-item.danger:hover { background: var(--danger-soft); }
-    .dropdown-item svg { flex-shrink: 0; opacity: 0.7; }
 
-    .dropdown-divider { height: 1px; background: var(--border); margin: 6px 0; }
+    .dropdown-item:hover {
+      background: var(--hover);
+    }
+
+    .dropdown-item.danger {
+      color: var(--danger);
+    }
+
+    .dropdown-item.danger:hover {
+      background: var(--danger-soft);
+    }
+
+    .dropdown-item svg {
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 6px 0;
+    }
+
     .dropdown-label {
       padding: 6px 12px 4px;
       font-size: 11px;
@@ -317,27 +411,51 @@
       letter-spacing: 0.04em;
     }
 
-    .color-row { display: flex; gap: 8px; padding: 8px 12px; flex-wrap: wrap; }
+    .color-row {
+      display: flex;
+      gap: 8px;
+      padding: 8px 12px;
+      flex-wrap: wrap;
+    }
+
     .color-option {
-      width: 22px; height: 22px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       border: 2px solid transparent;
       cursor: pointer;
     }
-    .color-option:hover { transform: scale(1.15); }
-    .color-option.active {
-      box-shadow: 0 0 0 2px var(--card-bg), 0 0 0 4px var(--text-primary);
+
+    .color-option:hover {
+      transform: scale(1.15);
     }
-    .color-option.none { background: #e4e4e7; position: relative; }
-    [data-theme="dark"] .color-option.none { background: #3f3f46; }
+
+    .color-option.active {
+      box-shadow:
+        0 0 0 2px var(--card-bg),
+        0 0 0 4px var(--text-primary);
+    }
+
+    .color-option.none {
+      background: #e4e4e7;
+      position: relative;
+    }
+
+    [data-theme="dark"] .color-option.none {
+      background: #3f3f46;
+    }
+
     .color-option.none::after {
       content: '';
       position: absolute;
-      top: 50%; left: 2px; right: 2px;
+      top: 50%;
+      left: 2px;
+      right: 2px;
       height: 2px;
       background: #a1a1aa;
       transform: rotate(-45deg);
     }
+
     .color-option.red { background: #ef4444; }
     .color-option.orange { background: #f97316; }
     .color-option.yellow { background: #eab308; }
@@ -352,6 +470,7 @@
       gap: 6px;
       padding: 6px 12px 10px;
     }
+
     .font-size-control input[type="number"] {
       width: 72px;
       padding: 6px 8px;
@@ -363,7 +482,11 @@
       font-size: 13px;
       outline: none;
     }
-    .font-size-unit { font-size: 12px; color: var(--text-tertiary); }
+
+    .font-size-unit {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
 
     .toggle-row {
       display: flex;
@@ -372,13 +495,18 @@
       padding: 8px 12px 10px;
       font-size: 13.5px;
     }
+
     .switch {
       position: relative;
       width: 36px;
       height: 20px;
       flex-shrink: 0;
     }
-    .switch input { display: none; }
+
+    .switch input {
+      display: none;
+    }
+
     .switch span {
       position: absolute;
       inset: 0;
@@ -387,17 +515,26 @@
       cursor: pointer;
       transition: background 0.15s;
     }
+
     .switch span::after {
       content: '';
       position: absolute;
-      top: 2px; left: 2px;
-      width: 16px; height: 16px;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
       background: var(--card-bg);
       border-radius: 50%;
       transition: transform 0.15s;
     }
-    .switch input:checked + span { background: var(--accent); }
-    .switch input:checked + span::after { transform: translateX(16px); }
+
+    .switch input:checked + span {
+      background: var(--accent);
+    }
+
+    .switch input:checked + span::after {
+      transform: translateX(16px);
+    }
 
     .editor-meta {
       padding: 8px 40px 16px;
@@ -408,12 +545,26 @@
       color: var(--text-tertiary);
       flex-wrap: wrap;
     }
-    .editor-meta span { display: flex; align-items: center; gap: 5px; }
 
-    .save-status.unsaved { color: #d97706; }
-    .save-status.saved { color: var(--text-tertiary); }
+    .editor-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-    .divider { height: 1px; background: var(--border); margin: 0 40px; }
+    .save-status.unsaved {
+      color: #d97706;
+    }
+
+    .save-status.saved {
+      color: var(--text-tertiary);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 40px;
+    }
 
     .toolbar {
       padding: 12px 40px;
@@ -424,21 +575,43 @@
     }
 
     .tool-btn {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border-radius: 6px;
       border: none;
       background: transparent;
       color: var(--text-secondary);
       cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 14px;
       font-weight: 500;
     }
-    .tool-btn:hover { background: var(--hover); color: var(--text-primary); }
-    .tool-btn.active { background: var(--accent-soft); color: var(--text-primary); }
-    .tool-separator { width: 1px; height: 20px; background: var(--border); margin: 0 6px; }
 
-    .toolbar-size { display: flex; align-items: center; gap: 2px; }
+    .tool-btn:hover {
+      background: var(--hover);
+      color: var(--text-primary);
+    }
+
+    .tool-btn.active {
+      background: var(--accent-soft);
+      color: var(--text-primary);
+    }
+
+    .tool-separator {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+      margin: 0 6px;
+    }
+
+    .toolbar-size {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
     .toolbar-size input[type="number"] {
       width: 58px;
       height: 32px;
@@ -452,7 +625,10 @@
       text-align: center;
       outline: none;
     }
-    .toolbar-size .tool-btn { width: 26px; }
+
+    .toolbar-size .tool-btn {
+      width: 26px;
+    }
 
     .editor-body {
       flex: 1;
@@ -472,11 +648,13 @@
       color: var(--text-primary);
       background: transparent;
     }
+
     .editor-content:empty:before {
       content: attr(data-placeholder);
       color: var(--text-tertiary);
       pointer-events: none;
     }
+
     .editor-content pre {
       background: var(--sidebar-bg);
       border: 1px solid var(--border);
@@ -488,6 +666,7 @@
       margin: 12px 0;
       white-space: pre-wrap;
     }
+
     .editor-content code {
       font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
       font-size: 0.9em;
@@ -495,7 +674,12 @@
       padding: 2px 5px;
       border-radius: 4px;
     }
-    .editor-content pre code { background: none; padding: 0; }
+
+    .editor-content pre code {
+      background: none;
+      padding: 0;
+    }
+
     .editor-content .math-block {
       background: var(--sidebar-bg);
       border: 1px solid var(--border);
@@ -505,23 +689,50 @@
       text-align: center;
       overflow-x: auto;
     }
+
     .editor-content table {
       border-collapse: collapse;
       width: 100%;
       margin: 16px 0;
       font-size: 0.9em;
     }
-    .editor-content th, .editor-content td {
+
+    .editor-content th,
+    .editor-content td {
       border: 1px solid var(--border);
       padding: 10px 14px;
       text-align: left;
     }
-    .editor-content th { background: var(--sidebar-bg); font-weight: 600; }
-    .editor-content ul, .editor-content ol { padding-left: 24px; margin: 8px 0; }
-    .editor-content h2 { font-size: 1.35em; font-weight: 600; margin: 18px 0 8px; }
-    .editor-content a { color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
 
-    .editor-content .checklist { list-style: none; padding-left: 0; margin: 12px 0; }
+    .editor-content th {
+      background: var(--sidebar-bg);
+      font-weight: 600;
+    }
+
+    .editor-content ul,
+    .editor-content ol {
+      padding-left: 24px;
+      margin: 8px 0;
+    }
+
+    .editor-content h2 {
+      font-size: 1.35em;
+      font-weight: 600;
+      margin: 18px 0 8px;
+    }
+
+    .editor-content a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .editor-content .checklist {
+      list-style: none;
+      padding-left: 0;
+      margin: 12px 0;
+    }
+
     .editor-content .checklist li {
       display: flex;
       align-items: flex-start;
@@ -529,8 +740,10 @@
       padding: 6px 0;
       cursor: pointer;
     }
+
     .editor-content .checklist li .check-box {
-      width: 18px; height: 18px;
+      width: 18px;
+      height: 18px;
       border: 1.5px solid var(--text-tertiary);
       border-radius: 5px;
       flex-shrink: 0;
@@ -540,23 +753,41 @@
       justify-content: center;
       background: var(--card-bg);
     }
+
     .editor-content .checklist li.checked .check-box {
       background: var(--accent);
       border-color: var(--accent);
     }
-    .editor-content .checklist li.checked .check-box svg { display: block; }
+
+    .editor-content .checklist li.checked .check-box svg {
+      display: block;
+    }
+
     .editor-content .checklist li .check-box svg {
       display: none;
-      width: 12px; height: 12px;
+      width: 12px;
+      height: 12px;
       color: var(--bg);
     }
+
     .editor-content .checklist li.checked .task-text {
       text-decoration: line-through;
       color: var(--text-tertiary);
     }
-    .editor-content .checklist li .task-text { flex: 1; outline: none; min-height: 1.4em; }
 
-    .tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .editor-content .checklist li .task-text {
+      flex: 1;
+      outline: none;
+      min-height: 1.4em;
+    }
+
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
     .tag {
       font-size: 12px;
       padding: 3px 10px;
@@ -569,6 +800,7 @@
       align-items: center;
       gap: 4px;
     }
+
     .tag .remove-tag {
       cursor: pointer;
       opacity: 0.5;
@@ -577,7 +809,11 @@
       background: none;
       color: inherit;
     }
-    .tag .remove-tag:hover { opacity: 1; }
+
+    .tag .remove-tag:hover {
+      opacity: 1;
+    }
+
     .add-tag-btn {
       font-size: 12px;
       padding: 3px 10px;
@@ -599,7 +835,11 @@
       z-index: 200;
       backdrop-filter: blur(3px);
     }
-    .modal-overlay.open { display: flex; }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
     .modal {
       background: var(--card-bg);
       border-radius: 14px;
@@ -609,6 +849,7 @@
       overflow: hidden;
       border: 1px solid var(--border);
     }
+
     .modal-header {
       padding: 18px 22px;
       border-bottom: 1px solid var(--border);
@@ -616,18 +857,33 @@
       align-items: center;
       justify-content: space-between;
     }
-    .modal-header h3 { font-size: 16px; font-weight: 600; }
+
+    .modal-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
     .modal-close {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border: none;
       background: transparent;
       border-radius: 8px;
       cursor: pointer;
       color: var(--text-secondary);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .modal-close:hover { background: var(--hover); }
-    .modal-body { padding: 20px 22px; }
+
+    .modal-close:hover {
+      background: var(--hover);
+    }
+
+    .modal-body {
+      padding: 20px 22px;
+    }
+
     .modal-body label {
       display: block;
       font-size: 13px;
@@ -635,6 +891,7 @@
       margin-bottom: 8px;
       color: var(--text-secondary);
     }
+
     .modal-body input[type="text"],
     .modal-body textarea {
       width: 100%;
@@ -648,13 +905,20 @@
       background: var(--bg);
       color: var(--text-primary);
     }
+
     .modal-body textarea {
       min-height: 100px;
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 13.5px;
       resize: vertical;
     }
-    .modal-hint { font-size: 12px; color: var(--text-tertiary); margin-top: -4px; }
+
+    .modal-hint {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: -4px;
+    }
+
     .modal-footer {
       padding: 14px 22px 18px;
       display: flex;
@@ -671,69 +935,165 @@
       cursor: pointer;
       border: none;
     }
-    .btn-secondary { background: var(--hover); color: var(--text-primary); }
-    .btn-primary { background: var(--accent); color: var(--bg); }
-    .btn-danger { background: var(--danger); color: white; }
+
+    .btn-secondary {
+      background: var(--hover);
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
 
     @media (max-width: 768px) {
-      .sidebar { width: 260px; }
-      .editor-header, .editor-meta, .toolbar, .editor-body, .divider {
-        padding-left: 24px; padding-right: 24px;
+      .sidebar {
+        width: 260px;
+      }
+
+      .editor-header,
+      .editor-meta,
+      .toolbar,
+      .editor-body {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .divider {
+        margin-left: 24px;
+        margin-right: 24px;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="app">
+
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="logo">
+
+          <!-- Inline pen-writing logo -->
           <div class="logo-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
-              <path d="M10 7h4M10 11h4M10 15h2"/>
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path d="M4 20l4.2-1 10.1-10.1a2.1 2.1 0 0 0-3-3L5.2 16 4 20z"/>
+              <path d="M13.5 7.5l3 3"/>
+              <path d="M7 20h13"/>
             </svg>
           </div>
+
           Notes
         </div>
       </div>
 
       <div class="search-box">
-        <input type="text" class="search-input" placeholder="Search notes..." id="searchInput" oninput="filterNotes()">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search notes..."
+          id="searchInput"
+          oninput="filterNotes()"
+        >
       </div>
 
       <div class="notes-list" id="notesList"></div>
+
       <div class="watermark">CHRISLER NUNES © 2026</div>
     </aside>
 
     <main class="editor">
+
       <div class="editor-header">
-        <input type="text" class="editor-title" id="noteTitle" placeholder="Untitled note" oninput="updateNote()">
+
+        <input
+          type="text"
+          class="editor-title"
+          id="noteTitle"
+          placeholder="Untitled note"
+          oninput="updateNote()"
+        >
+
         <div class="editor-actions">
-          <button class="icon-btn" id="saveBtn" title="Save now" onclick="saveNotes(true)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-              <polyline points="17 21 17 13 7 13 7 21"/>
-              <polyline points="7 3 7 8 15 8"/>
-            </svg>
-          </button>
-          <button class="theme-toggle" title="Toggle theme" onclick="toggleTheme()">
-            <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+          <!-- Theme -->
+          <button
+            class="theme-toggle"
+            title="Toggle theme"
+            onclick="toggleTheme()"
+          >
+            <svg
+              id="themeIcon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
-          <button class="icon-btn" id="moreBtn" title="More options" onclick="toggleDropdown(event)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+
+          <!-- Pin -->
+          <button
+            class="icon-btn"
+            id="pinBtn"
+            title="Pin note"
+            onclick="togglePin()"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 17v5"/>
+              <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>
             </svg>
           </button>
-          <button class="icon-btn" id="pinBtn" title="Pin note" onclick="togglePin()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>
+
+          <!-- Three dots — now positioned at the right -->
+          <button
+            class="icon-btn"
+            id="moreBtn"
+            title="More options"
+            onclick="toggleDropdown(event)"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="12" cy="5" r="1"/>
+              <circle cx="12" cy="12" r="1"/>
+              <circle cx="12" cy="19" r="1"/>
             </svg>
           </button>
+
           <div class="dropdown" id="moreDropdown">
+
             <div class="dropdown-label">Bookmark color</div>
+
             <div class="color-row">
               <div class="color-option none" data-color="" title="None" onclick="setColor('')"></div>
               <div class="color-option red" data-color="red" title="Red" onclick="setColor('red')"></div>
@@ -744,34 +1104,69 @@
               <div class="color-option purple" data-color="purple" title="Purple" onclick="setColor('purple')"></div>
               <div class="color-option pink" data-color="pink" title="Pink" onclick="setColor('pink')"></div>
             </div>
+
             <div class="dropdown-divider"></div>
+
             <div class="dropdown-label">Default font size</div>
+
             <div class="font-size-control">
-              <input type="number" id="dropdownFontSize" min="8" max="72" step="1" value="16" onchange="setFontSize(this.value)">
+              <input
+                type="number"
+                id="dropdownFontSize"
+                min="8"
+                max="72"
+                step="1"
+                value="16"
+                onchange="setFontSize(this.value)"
+              >
               <span class="font-size-unit">px</span>
             </div>
+
             <div class="dropdown-divider"></div>
+
             <div class="dropdown-label">Saving</div>
+
             <div class="toggle-row">
               Auto-save
+
               <label class="switch">
-                <input type="checkbox" id="autoSaveToggle" checked onchange="setAutoSave(this.checked)">
+                <input
+                  type="checkbox"
+                  id="autoSaveToggle"
+                  checked
+                  onchange="setAutoSave(this.checked)"
+                >
                 <span></span>
               </label>
             </div>
+
             <div class="dropdown-divider"></div>
+
             <button class="dropdown-item" onclick="editCategories()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                <line x1="7" y1="7" x2="7.01" y2="7"/>
+              </svg>
               Edit categories
             </button>
+
             <button class="dropdown-item" onclick="duplicateNote()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
               Duplicate
             </button>
+
             <button class="dropdown-item danger" onclick="deleteNote()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
               Delete note
             </button>
+
           </div>
         </div>
       </div>
@@ -786,70 +1181,195 @@
       <div class="divider"></div>
 
       <div class="toolbar">
-        <button class="tool-btn" id="boldBtn" title="Bold" onclick="format('bold')"><b>B</b></button>
-        <button class="tool-btn" id="italicBtn" title="Italic" onclick="format('italic')"><i>I</i></button>
-        <button class="tool-btn" id="underlineBtn" title="Underline" onclick="format('underline')"><u>U</u></button>
+
+        <button class="tool-btn" id="boldBtn" title="Bold" onclick="format('bold')">
+          <b>B</b>
+        </button>
+
+        <button class="tool-btn" id="italicBtn" title="Italic" onclick="format('italic')">
+          <i>I</i>
+        </button>
+
+        <button class="tool-btn" id="underlineBtn" title="Underline" onclick="format('underline')">
+          <u>U</u>
+        </button>
+
         <div class="toolbar-size">
           <button class="tool-btn" title="Smaller" onclick="nudgeFontSize(-1)">−</button>
-          <input type="number" id="toolbarFontSize" min="8" max="72" step="1" value="16" title="Font size (px)" onchange="applySelectionFontSize(this.value)">
+
+          <input
+            type="number"
+            id="toolbarFontSize"
+            min="8"
+            max="72"
+            step="1"
+            value="16"
+            title="Font size (px)"
+            onchange="applySelectionFontSize(this.value)"
+          >
+
           <button class="tool-btn" title="Larger" onclick="nudgeFontSize(1)">+</button>
         </div>
+
         <div class="tool-separator"></div>
-        <button class="tool-btn" title="Heading" onclick="format('formatBlock','H2')" style="font-size:12px;font-weight:600;">H</button>
-        <button class="tool-btn" title="Bullet list" onclick="format('insertUnorderedList')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Heading"
+          onclick="format('formatBlock','H2')"
+          style="font-size:12px;font-weight:600;"
+        >
+          H
         </button>
-        <button class="tool-btn" title="Numbered list" onclick="format('insertOrderedList')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Bullet list"
+          onclick="format('insertUnorderedList')"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
         </button>
-        <button class="tool-btn" title="Checklist" onclick="insertChecklist()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Numbered list"
+          onclick="format('insertOrderedList')"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="10" y1="6" x2="21" y2="6"/>
+            <line x1="10" y1="12" x2="21" y2="12"/>
+            <line x1="10" y1="18" x2="21" y2="18"/>
+            <path d="M4 6h1v4"/>
+            <path d="M4 10h2"/>
+            <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/>
+          </svg>
         </button>
+
+        <button
+          class="tool-btn"
+          title="Checklist"
+          onclick="insertChecklist()"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </button>
+
         <div class="tool-separator"></div>
-        <button class="tool-btn" title="Insert link" onclick="openModal('link')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Insert link"
+          onclick="openModal('link')"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
         </button>
-        <button class="tool-btn" title="Insert table" onclick="insertTable()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Insert table"
+          onclick="insertTable()"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3h18v18H3z"/>
+            <path d="M3 9h18"/>
+            <path d="M3 15h18"/>
+            <path d="M9 3v18"/>
+            <path d="M15 3v18"/>
+          </svg>
         </button>
-        <button class="tool-btn" title="Insert code block" onclick="openModal('code')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Insert code block"
+          onclick="openModal('code')"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
         </button>
-        <button class="tool-btn" title="Insert math formula" onclick="openModal('math')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h4l2-12h4l2 12h4"/><path d="M8 11h8"/></svg>
+
+        <button
+          class="tool-btn"
+          title="Insert math formula"
+          onclick="openModal('math')"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19h4l2-12h4l2 12h4"/>
+            <path d="M8 11h8"/>
+          </svg>
         </button>
+
       </div>
 
       <div class="editor-body">
-        <div class="editor-content" contenteditable="true" id="noteBody" data-placeholder="Start writing..." oninput="updateNote()" onmouseup="syncFormatButtons()" onkeyup="syncFormatButtons()"></div>
+        <div
+          class="editor-content"
+          contenteditable="true"
+          id="noteBody"
+          data-placeholder="Start writing..."
+          oninput="updateNote()"
+          onmouseup="syncFormatButtons()"
+          onkeyup="syncFormatButtons()"
+        ></div>
       </div>
+
     </main>
   </div>
 
+  <!-- New note -->
   <button class="fab" title="New note" onclick="createNote()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <path d="M12 5v14M5 12h14"/>
     </svg>
   </button>
 
+  <!-- Modal -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
+
       <div class="modal-header">
         <h3 id="modalTitle">Insert</h3>
+
         <button class="modal-close" onclick="closeModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
         </button>
       </div>
+
       <div class="modal-body" id="modalBody"></div>
+
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
         <button class="btn btn-primary" id="modalConfirmBtn" onclick="insertFromModal()">Insert</button>
       </div>
+
     </div>
   </div>
 
   <script>
     const STORAGE_KEY = 'notes-app-v1';
+
     const DEFAULT_NOTES = [
       {
         id: 1,
@@ -913,13 +1433,18 @@
 
     function clampFontSize(size) {
       const n = parseInt(size, 10);
-      if (Number.isNaN(n)) return currentFontSize;
+
+      if (Number.isNaN(n)) {
+        return currentFontSize;
+      }
+
       return Math.min(72, Math.max(8, n));
     }
 
     function syncFontInputs(size) {
       const toolbar = document.getElementById('toolbarFontSize');
       const dropdown = document.getElementById('dropdownFontSize');
+
       if (toolbar) toolbar.value = size;
       if (dropdown) dropdown.value = size;
     }
@@ -927,8 +1452,11 @@
     function loadState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
+
         if (!raw) return;
+
         const data = JSON.parse(raw);
+
         if (Array.isArray(data.notes) && data.notes.length) {
           notes = data.notes.map(n => ({
             id: n.id,
@@ -941,17 +1469,33 @@
             color: n.color || ''
           }));
         }
-        if (notes.some(n => n.id === data.activeId)) activeId = data.activeId;
-        else activeId = notes[0].id;
-        if (data.fontSize) currentFontSize = clampFontSize(data.fontSize);
-        if (typeof data.autoSave === 'boolean') autoSave = data.autoSave;
+
+        if (notes.some(n => n.id === data.activeId)) {
+          activeId = data.activeId;
+        } else {
+          activeId = notes[0].id;
+        }
+
+        if (data.fontSize) {
+          currentFontSize = clampFontSize(data.fontSize);
+        }
+
+        if (typeof data.autoSave === 'boolean') {
+          autoSave = data.autoSave;
+        }
+
       } catch (err) {
         notes = DEFAULT_NOTES.map(n => ({ ...n }));
       }
     }
 
-    function saveNotes(manual) {
+    /*
+      Auto-save only.
+      There is intentionally no manual save button anymore.
+    */
+    function saveNotes() {
       clearTimeout(saveTimer);
+
       const payload = {
         notes,
         activeId,
@@ -959,10 +1503,11 @@
         autoSave,
         savedAt: Date.now()
       };
+
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
         dirty = false;
-        setSaveStatus(manual ? 'Saved' : 'Saved', false);
+        setSaveStatus('Saved', false);
       } catch (err) {
         setSaveStatus('Save failed', true);
       }
@@ -970,14 +1515,24 @@
 
     function scheduleSave() {
       dirty = true;
-      setSaveStatus(autoSave ? 'Saving…' : 'Unsaved', true);
+
+      setSaveStatus(
+        autoSave ? 'Saving…' : 'Unsaved',
+        true
+      );
+
       if (!autoSave) return;
+
       clearTimeout(saveTimer);
-      saveTimer = setTimeout(() => saveNotes(false), 350);
+
+      saveTimer = setTimeout(() => {
+        saveNotes();
+      }, 350);
     }
 
     function setSaveStatus(text, unsaved) {
       const el = document.getElementById('saveStatus');
+
       el.textContent = text;
       el.classList.toggle('unsaved', unsaved);
       el.classList.toggle('saved', !unsaved);
@@ -985,13 +1540,20 @@
 
     function setAutoSave(on) {
       autoSave = !!on;
+
       document.getElementById('autoSaveToggle').checked = autoSave;
-      if (autoSave && dirty) saveNotes(false);
-      else saveNotes(true);
+
+      if (autoSave && dirty) {
+        saveNotes();
+      } else {
+        saveNotes();
+      }
     }
 
     function toggleTheme() {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const isDark =
+        document.documentElement.getAttribute('data-theme') === 'dark';
+
       if (isDark) {
         document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('notes-theme', 'light');
@@ -1005,31 +1567,60 @@
 
     function updateThemeIcon(isDark) {
       const icon = document.getElementById('themeIcon');
+
       icon.innerHTML = isDark
-        ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
-        : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        ? `
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        `
+        : `
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        `;
     }
 
     function renderNotes(filter) {
       filter = (filter || '').toLowerCase();
+
       const list = document.getElementById('notesList');
-      const filtered = notes.filter(n =>
-        n.title.toLowerCase().includes(filter) ||
-        n.body.toLowerCase().includes(filter) ||
-        n.tags.some(t => t.toLowerCase().includes(filter))
-      ).sort((a, b) => {
-        if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
-        return b.id - a.id;
-      });
+
+      const filtered = notes
+        .filter(n =>
+          n.title.toLowerCase().includes(filter) ||
+          n.body.toLowerCase().includes(filter) ||
+          n.tags.some(t => t.toLowerCase().includes(filter))
+        )
+        .sort((a, b) => {
+          if (a.pinned !== b.pinned) {
+            return a.pinned ? -1 : 1;
+          }
+
+          return b.id - a.id;
+        });
 
       list.innerHTML = filtered.map(note => `
-        <div class="note-item ${note.id === activeId ? 'active' : ''} ${note.pinned ? 'pinned' : ''} ${note.color ? 'color-' + note.color : ''}" onclick="selectNote(${note.id})">
-          <div class="note-title">${escapeHtml(note.title) || 'Untitled note'}</div>
-          <div class="note-preview">${escapeHtml(note.preview)}</div>
+        <div
+          class="note-item ${note.id === activeId ? 'active' : ''} ${note.pinned ? 'pinned' : ''} ${note.color ? 'color-' + note.color : ''}"
+          onclick="selectNote(${note.id})"
+        >
+          <div class="note-title">
+            ${escapeHtml(note.title) || 'Untitled note'}
+          </div>
+
+          <div class="note-preview">
+            ${escapeHtml(note.preview)}
+          </div>
+
           <div class="note-meta">
-            <span>${note.date}</span>
+            <span>${escapeHtml(note.date)}</span>
             ${note.tags.length ? '·' : ''}
-            <span>${note.tags.join(', ')}</span>
+            <span>${escapeHtml(note.tags.join(', '))}</span>
           </div>
         </div>
       `).join('');
@@ -1037,33 +1628,57 @@
 
     function escapeHtml(text) {
       const div = document.createElement('div');
+
       div.textContent = text || '';
+
       return div.innerHTML;
     }
 
     function selectNote(id) {
       if (dirty) {
-        if (autoSave) saveNotes(false);
-        else saveNotes(true);
+        if (autoSave) {
+          saveNotes();
+        } else {
+          saveNotes();
+        }
       }
+
       activeId = id;
+
       const note = notes.find(n => n.id === id);
+
       if (!note) return;
 
       document.getElementById('noteTitle').value = note.title;
       document.getElementById('noteBody').innerHTML = note.body;
+
       document.getElementById('noteDate').innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        ${note.date}
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        ${escapeHtml(note.date)}
       `;
+
       renderTags(note.tags);
 
       const pinBtn = document.getElementById('pinBtn');
+
       pinBtn.classList.toggle('pinned', note.pinned);
       pinBtn.title = note.pinned ? 'Unpin note' : 'Pin note';
 
       document.querySelectorAll('.color-option').forEach(el => {
-        el.classList.toggle('active', el.dataset.color === (note.color || ''));
+        el.classList.toggle(
+          'active',
+          el.dataset.color === (note.color || '')
+        );
       });
 
       updateWordCount();
@@ -1076,31 +1691,72 @@
 
     function renderMath() {
       if (!window.renderMathInElement) return;
+
       renderMathInElement(document.getElementById('noteBody'), {
         delimiters: [
-          {left: '$$', right: '$$', display: true},
-          {left: '\\[', right: '\\]', display: true},
-          {left: '$', right: '$', display: false}
+          {
+            left: '$$',
+            right: '$$',
+            display: true
+          },
+          {
+            left: '\\[',
+            right: '\\]',
+            display: true
+          },
+          {
+            left: '$',
+            right: '$',
+            display: false
+          }
         ]
       });
     }
 
     function renderTags(tags) {
-      document.getElementById('noteTags').innerHTML = tags.map((t, i) => `
-        <span class="tag">${escapeHtml(t)}<button class="remove-tag" onclick="removeTag(${i})" title="Remove">×</button></span>
-      `).join('') + `<button class="add-tag-btn" onclick="editCategories()">+ Add</button>`;
+      document.getElementById('noteTags').innerHTML =
+        tags.map((t, i) => `
+          <span class="tag">
+            ${escapeHtml(t)}
+            <button
+              class="remove-tag"
+              onclick="removeTag(${i})"
+              title="Remove"
+            >
+              ×
+            </button>
+          </span>
+        `).join('') +
+        `
+          <button
+            class="add-tag-btn"
+            onclick="editCategories()"
+          >
+            + Add
+          </button>
+        `;
     }
 
     function updateNote() {
       const note = notes.find(n => n.id === activeId);
+
       if (!note) return;
+
       note.title = document.getElementById('noteTitle').value;
       note.body = document.getElementById('noteBody').innerHTML;
+
       const temp = document.createElement('div');
+
       temp.innerHTML = note.body;
+
       const text = (temp.innerText || '').trim();
-      note.preview = text.slice(0, 80).replace(/\n/g, ' ') + (text.length > 80 ? '...' : '');
+
+      note.preview =
+        text.slice(0, 80).replace(/\n/g, ' ') +
+        (text.length > 80 ? '...' : '');
+
       note.date = 'Just now';
+
       updateWordCount();
       renderNotes(document.getElementById('searchInput').value);
       syncFormatButtons();
@@ -1108,13 +1764,21 @@
     }
 
     function updateWordCount() {
-      const text = document.getElementById('noteBody').innerText.trim();
-      const words = text ? text.split(/\s+/).length : 0;
-      document.getElementById('wordCount').textContent = words + (words === 1 ? ' word' : ' words');
+      const text =
+        document.getElementById('noteBody').innerText.trim();
+
+      const words = text
+        ? text.split(/\s+/).length
+        : 0;
+
+      document.getElementById('wordCount').textContent =
+        words + (words === 1 ? ' word' : ' words');
     }
 
     function createNote() {
-      const newId = Math.max(0, ...notes.map(n => n.id)) + 1;
+      const newId =
+        Math.max(0, ...notes.map(n => n.id)) + 1;
+
       notes.unshift({
         id: newId,
         title: '',
@@ -1125,301 +1789,729 @@
         pinned: false,
         color: ''
       });
+
       activeId = newId;
+
       selectNote(newId);
+
       document.getElementById('noteTitle').focus();
+
       scheduleSave();
     }
 
     function filterNotes() {
-      renderNotes(document.getElementById('searchInput').value);
+      renderNotes(
+        document.getElementById('searchInput').value
+      );
     }
 
     function format(cmd, value) {
-      document.execCommand(cmd, false, value || null);
+      document.execCommand(
+        cmd,
+        false,
+        value || null
+      );
+
       document.getElementById('noteBody').focus();
+
       updateNote();
     }
 
     function syncFormatButtons() {
-      document.getElementById('boldBtn').classList.toggle('active', document.queryCommandState('bold'));
-      document.getElementById('italicBtn').classList.toggle('active', document.queryCommandState('italic'));
-      document.getElementById('underlineBtn').classList.toggle('active', document.queryCommandState('underline'));
+      document.getElementById('boldBtn')
+        .classList.toggle(
+          'active',
+          document.queryCommandState('bold')
+        );
+
+      document.getElementById('italicBtn')
+        .classList.toggle(
+          'active',
+          document.queryCommandState('italic')
+        );
+
+      document.getElementById('underlineBtn')
+        .classList.toggle(
+          'active',
+          document.queryCommandState('underline')
+        );
+
       const sel = window.getSelection();
+
       if (!sel || !sel.anchorNode) return;
-      const node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+
+      const node =
+        sel.anchorNode.nodeType === 3
+          ? sel.anchorNode.parentElement
+          : sel.anchorNode;
+
       const body = document.getElementById('noteBody');
+
       if (!node || !body.contains(node)) return;
-      const px = parseInt(window.getComputedStyle(node).fontSize, 10);
-      if (px) document.getElementById('toolbarFontSize').value = px;
+
+      const px =
+        parseInt(
+          window.getComputedStyle(node).fontSize,
+          10
+        );
+
+      if (px) {
+        document.getElementById('toolbarFontSize').value = px;
+      }
     }
 
     function applySelectionFontSize(size) {
       size = clampFontSize(size);
+
       syncFontInputs(size);
-      const body = document.getElementById('noteBody');
+
+      const body =
+        document.getElementById('noteBody');
+
       body.focus();
+
       const sel = window.getSelection();
-      const hasSelection = sel && sel.rangeCount && !sel.isCollapsed && body.contains(sel.anchorNode);
+
+      const hasSelection =
+        sel &&
+        sel.rangeCount &&
+        !sel.isCollapsed &&
+        body.contains(sel.anchorNode);
+
       if (!hasSelection) {
         setFontSize(size);
         return;
       }
-      document.execCommand('styleWithCSS', false, true);
-      document.execCommand('fontSize', false, '7');
-      body.querySelectorAll('font[size="7"]').forEach(font => {
-        const span = document.createElement('span');
-        span.style.fontSize = size + 'px';
-        while (font.firstChild) span.appendChild(font.firstChild);
-        font.replaceWith(span);
-      });
-      body.querySelectorAll('[style*="xxx-large"]').forEach(el => {
+
+      document.execCommand(
+        'styleWithCSS',
+        false,
+        true
+      );
+
+      document.execCommand(
+        'fontSize',
+        false,
+        '7'
+      );
+
+      body.querySelectorAll('font[size="7"]')
+        .forEach(font => {
+          const span =
+            document.createElement('span');
+
+          span.style.fontSize = size + 'px';
+
+          while (font.firstChild) {
+            span.appendChild(font.firstChild);
+          }
+
+          font.replaceWith(span);
+        });
+
+      body.querySelectorAll(
+        '[style*="xxx-large"]'
+      ).forEach(el => {
         el.style.fontSize = size + 'px';
       });
+
       updateNote();
     }
 
     function nudgeFontSize(delta) {
-      const input = document.getElementById('toolbarFontSize');
-      const next = clampFontSize(parseInt(input.value, 10) + delta);
+      const input =
+        document.getElementById('toolbarFontSize');
+
+      const next =
+        clampFontSize(
+          parseInt(input.value, 10) + delta
+        );
+
       input.value = next;
+
       applySelectionFontSize(next);
     }
 
     function togglePin() {
-      const note = notes.find(n => n.id === activeId);
+      const note =
+        notes.find(n => n.id === activeId);
+
       if (!note) return;
+
       note.pinned = !note.pinned;
+
       selectNote(activeId);
+
       scheduleSave();
     }
 
     function setColor(color) {
-      const note = notes.find(n => n.id === activeId);
+      const note =
+        notes.find(n => n.id === activeId);
+
       if (!note) return;
+
       note.color = color;
+
       selectNote(activeId);
+
       scheduleSave();
     }
 
     function setFontSize(size) {
       currentFontSize = clampFontSize(size);
-      document.documentElement.style.setProperty('--editor-font-size', currentFontSize + 'px');
+
+      document.documentElement.style.setProperty(
+        '--editor-font-size',
+        currentFontSize + 'px'
+      );
+
       syncFontInputs(currentFontSize);
+
       scheduleSave();
     }
 
     function toggleDropdown(e) {
       e.stopPropagation();
-      document.getElementById('moreDropdown').classList.toggle('open');
+
+      document
+        .getElementById('moreDropdown')
+        .classList.toggle('open');
     }
 
     function closeDropdown() {
-      document.getElementById('moreDropdown').classList.remove('open');
+      document
+        .getElementById('moreDropdown')
+        .classList.remove('open');
     }
 
     function deleteNote() {
       closeDropdown();
+
       if (notes.length <= 1) {
         alert('You need at least one note.');
         return;
       }
+
       currentModalType = 'delete';
-      document.getElementById('modalTitle').textContent = 'Delete note';
-      const title = notes.find(n => n.id === activeId)?.title || 'Untitled';
-      document.getElementById('modalBody').innerHTML = '<p style="font-size:14px;line-height:1.5;color:var(--text-secondary);">Delete <strong>"' + escapeHtml(title) + '"</strong>?<br><br>This cannot be undone.</p>';
-      document.getElementById('modalConfirmBtn').textContent = 'Delete';
-      document.getElementById('modalConfirmBtn').className = 'btn btn-danger';
-      document.getElementById('modalOverlay').classList.add('open');
+
+      document.getElementById('modalTitle').textContent =
+        'Delete note';
+
+      const title =
+        notes.find(n => n.id === activeId)?.title ||
+        'Untitled';
+
+      document.getElementById('modalBody').innerHTML = `
+        <p style="font-size:14px;line-height:1.5;color:var(--text-secondary);">
+          Delete <strong>"${escapeHtml(title)}"</strong>?
+          <br><br>
+          This cannot be undone.
+        </p>
+      `;
+
+      document.getElementById('modalConfirmBtn').textContent =
+        'Delete';
+
+      document.getElementById('modalConfirmBtn').className =
+        'btn btn-danger';
+
+      document.getElementById('modalOverlay')
+        .classList.add('open');
     }
 
     function confirmDelete() {
-      const idx = notes.findIndex(n => n.id === activeId);
+      const idx =
+        notes.findIndex(n => n.id === activeId);
+
       if (idx === -1) return;
+
       notes.splice(idx, 1);
-      activeId = notes[Math.min(idx, notes.length - 1)].id;
+
+      activeId =
+        notes[Math.min(idx, notes.length - 1)].id;
+
       selectNote(activeId);
+
       closeModal();
-      saveNotes(true);
+
+      saveNotes();
     }
 
     function duplicateNote() {
-      const original = notes.find(n => n.id === activeId);
+      const original =
+        notes.find(n => n.id === activeId);
+
       if (!original) return;
-      const copy = JSON.parse(JSON.stringify(original));
-      copy.id = Math.max(...notes.map(n => n.id)) + 1;
-      copy.title = original.title + ' (copy)';
+
+      const copy =
+        JSON.parse(JSON.stringify(original));
+
+      copy.id =
+        Math.max(...notes.map(n => n.id)) + 1;
+
+      copy.title =
+        original.title + ' (copy)';
+
       copy.date = 'Just now';
       copy.pinned = false;
+
       notes.unshift(copy);
+
       activeId = copy.id;
+
       selectNote(copy.id);
+
       closeDropdown();
+
       scheduleSave();
     }
 
     function editCategories() {
       closeDropdown();
-      const note = notes.find(n => n.id === activeId);
+
+      const note =
+        notes.find(n => n.id === activeId);
+
       if (!note) return;
+
       currentModalType = 'tags';
-      document.getElementById('modalTitle').textContent = 'Edit categories';
-      document.getElementById('modalBody').innerHTML = '<label>Categories (comma separated)</label><input type="text" id="modalTagsInput" value="' + escapeHtml(note.tags.join(', ')) + '" placeholder="Work, Personal, Ideas..."><p class="modal-hint">Separate with commas.</p>';
-      document.getElementById('modalConfirmBtn').textContent = 'Save';
-      document.getElementById('modalConfirmBtn').className = 'btn btn-primary';
-      document.getElementById('modalOverlay').classList.add('open');
-      setTimeout(() => document.getElementById('modalTagsInput')?.focus(), 50);
+
+      document.getElementById('modalTitle').textContent =
+        'Edit categories';
+
+      document.getElementById('modalBody').innerHTML = `
+        <label>Categories (comma separated)</label>
+
+        <input
+          type="text"
+          id="modalTagsInput"
+          value="${escapeHtml(note.tags.join(', '))}"
+          placeholder="Work, Personal, Ideas..."
+        >
+
+        <p class="modal-hint">
+          Separate with commas.
+        </p>
+      `;
+
+      document.getElementById('modalConfirmBtn').textContent =
+        'Save';
+
+      document.getElementById('modalConfirmBtn').className =
+        'btn btn-primary';
+
+      document.getElementById('modalOverlay')
+        .classList.add('open');
+
+      setTimeout(() => {
+        document
+          .getElementById('modalTagsInput')
+          ?.focus();
+      }, 50);
     }
 
     function removeTag(index) {
-      const note = notes.find(n => n.id === activeId);
+      const note =
+        notes.find(n => n.id === activeId);
+
       if (!note) return;
+
       note.tags.splice(index, 1);
+
       renderTags(note.tags);
-      renderNotes(document.getElementById('searchInput').value);
+
+      renderNotes(
+        document.getElementById('searchInput').value
+      );
+
       scheduleSave();
     }
 
     function insertChecklist() {
-      insertHTML('<ul class="checklist"><li data-checked="false"><span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><span class="task-text" contenteditable="true">Task item</span></li></ul><p><br></p>');
+      insertHTML(`
+        <ul class="checklist">
+          <li data-checked="false">
+            <span class="check-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </span>
+            <span class="task-text" contenteditable="true">
+              Task item
+            </span>
+          </li>
+        </ul>
+        <p><br></p>
+      `);
+
       bindChecklistEvents();
+
       updateNote();
     }
 
     function bindChecklistEvents() {
-      document.getElementById('noteBody').querySelectorAll('.checklist li').forEach(li => {
-        if (li.dataset.bound) return;
-        li.dataset.bound = 'true';
-        const box = li.querySelector('.check-box');
-        if (box) {
-          box.addEventListener('click', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            const checked = li.dataset.checked === 'true';
-            const list = li.closest('.checklist');
-            li.dataset.checked = checked ? 'false' : 'true';
-            li.classList.toggle('checked', !checked);
-            if (!checked && list) list.appendChild(li);
-            updateNote();
-          });
-        }
-      });
+      document
+        .getElementById('noteBody')
+        .querySelectorAll('.checklist li')
+        .forEach(li => {
+
+          if (li.dataset.bound) return;
+
+          li.dataset.bound = 'true';
+
+          const box =
+            li.querySelector('.check-box');
+
+          if (box) {
+            box.addEventListener('click', e => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const checked =
+                li.dataset.checked === 'true';
+
+              const list =
+                li.closest('.checklist');
+
+              li.dataset.checked =
+                checked ? 'false' : 'true';
+
+              li.classList.toggle(
+                'checked',
+                !checked
+              );
+
+              if (!checked && list) {
+                list.appendChild(li);
+              }
+
+              updateNote();
+            });
+          }
+        });
     }
 
     function insertTable() {
-      insertHTML('<table><thead><tr><th>Header 1</th><th>Header 2</th><th>Header 3</th></tr></thead><tbody><tr><td>Cell</td><td>Cell</td><td>Cell</td></tr><tr><td>Cell</td><td>Cell</td><td>Cell</td></tr></tbody></table><p><br></p>');
+      insertHTML(`
+        <table>
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+              <th>Header 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+            <tr>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br></p>
+      `);
+
       updateNote();
     }
 
     function openModal(type) {
       currentModalType = type;
-      const title = document.getElementById('modalTitle');
-      const body = document.getElementById('modalBody');
-      const btn = document.getElementById('modalConfirmBtn');
+
+      const title =
+        document.getElementById('modalTitle');
+
+      const body =
+        document.getElementById('modalBody');
+
+      const btn =
+        document.getElementById('modalConfirmBtn');
+
       btn.textContent = 'Insert';
       btn.className = 'btn btn-primary';
+
       if (type === 'code') {
         title.textContent = 'Insert Code Block';
-        body.innerHTML = '<label>Code</label><textarea id="modalInput" placeholder="paste your code here..."></textarea>';
+
+        body.innerHTML = `
+          <label>Code</label>
+
+          <textarea
+            id="modalInput"
+            placeholder="paste your code here..."
+          ></textarea>
+        `;
+
       } else if (type === 'math') {
+
         title.textContent = 'Insert Math Formula';
-        body.innerHTML = '<label>LaTeX formula</label><textarea id="modalInput" placeholder="E = mc^2"></textarea><p class="modal-hint">Use $$ ... $$ for display math.</p>';
+
+        body.innerHTML = `
+          <label>LaTeX formula</label>
+
+          <textarea
+            id="modalInput"
+            placeholder="E = mc^2"
+          ></textarea>
+
+          <p class="modal-hint">
+            Use $$ ... $$ for display math.
+          </p>
+        `;
+
       } else if (type === 'link') {
+
         title.textContent = 'Insert Link';
-        body.innerHTML = '<label>URL</label><input type="text" id="modalUrl" placeholder="https://example.com"><label>Link text (optional)</label><input type="text" id="modalLinkText" placeholder="Click here">';
+
+        body.innerHTML = `
+          <label>URL</label>
+
+          <input
+            type="text"
+            id="modalUrl"
+            placeholder="https://example.com"
+          >
+
+          <label>Link text (optional)</label>
+
+          <input
+            type="text"
+            id="modalLinkText"
+            placeholder="Click here"
+          >
+        `;
       }
-      document.getElementById('modalOverlay').classList.add('open');
-      setTimeout(() => body.querySelector('input, textarea')?.focus(), 50);
+
+      document.getElementById('modalOverlay')
+        .classList.add('open');
+
+      setTimeout(() => {
+        body.querySelector('input, textarea')?.focus();
+      }, 50);
     }
 
     function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('open');
+      document.getElementById('modalOverlay')
+        .classList.remove('open');
+
       currentModalType = null;
     }
 
     function insertFromModal() {
-      if (currentModalType === 'delete') { confirmDelete(); return; }
-      if (currentModalType === 'tags') {
-        const note = notes.find(n => n.id === activeId);
-        if (note) {
-          note.tags = document.getElementById('modalTagsInput').value.split(',').map(t => t.trim()).filter(Boolean);
-          renderTags(note.tags);
-          renderNotes(document.getElementById('searchInput').value);
-          scheduleSave();
-        }
-        closeModal();
+      if (currentModalType === 'delete') {
+        confirmDelete();
         return;
       }
-      if (currentModalType === 'code') {
-        const content = document.getElementById('modalInput').value.trim();
-        if (content) {
-          const escaped = content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-          insertHTML('<pre><code>' + escaped + '</code></pre><p><br></p>');
+
+      if (currentModalType === 'tags') {
+        const note =
+          notes.find(n => n.id === activeId);
+
+        if (note) {
+          note.tags =
+            document
+              .getElementById('modalTagsInput')
+              .value
+              .split(',')
+              .map(t => t.trim())
+              .filter(Boolean);
+
+          renderTags(note.tags);
+
+          renderNotes(
+            document.getElementById('searchInput').value
+          );
+
+          scheduleSave();
         }
+
+        closeModal();
+
+        return;
+      }
+
+      if (currentModalType === 'code') {
+
+        const content =
+          document.getElementById('modalInput')
+            .value
+            .trim();
+
+        if (content) {
+          const escaped =
+            escapeHtml(content);
+
+          insertHTML(
+            '<pre><code>' +
+            escaped +
+            '</code></pre><p><br></p>'
+          );
+        }
+
       } else if (currentModalType === 'math') {
-        let formula = document.getElementById('modalInput').value.trim();
+
+        let formula =
+          document.getElementById('modalInput')
+            .value
+            .trim();
+
         if (formula) {
-          if (!formula.startsWith('$') && !formula.startsWith('\\[')) formula = '$$' + formula + '$$';
-          insertHTML('<div class="math-block">' + formula + '</div><p><br></p>');
+
+          if (
+            !formula.startsWith('$') &&
+            !formula.startsWith('\\[')
+          ) {
+            formula =
+              '$$' + formula + '$$';
+          }
+
+          insertHTML(
+            '<div class="math-block">' +
+            formula +
+            '</div><p><br></p>'
+          );
+
           setTimeout(renderMath, 30);
         }
+
       } else if (currentModalType === 'link') {
-        let url = document.getElementById('modalUrl').value.trim();
-        let text = document.getElementById('modalLinkText').value.trim();
+
+        let url =
+          document.getElementById('modalUrl')
+            .value
+            .trim();
+
+        let text =
+          document.getElementById('modalLinkText')
+            .value
+            .trim();
+
         if (url) {
-          if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
-          if (!text) text = url;
-          insertHTML('<a href="' + url + '" target="_blank" rel="noopener">' + escapeHtml(text) + '</a>&nbsp;');
+
+          if (!/^https?:\/\//i.test(url)) {
+            url = 'https://' + url;
+          }
+
+          if (!text) {
+            text = url;
+          }
+
+          insertHTML(
+            '<a href="' +
+            escapeHtml(url) +
+            '" target="_blank" rel="noopener">' +
+            escapeHtml(text) +
+            '</a>&nbsp;'
+          );
         }
       }
+
       closeModal();
+
       updateNote();
     }
 
     function insertHTML(html) {
-      const body = document.getElementById('noteBody');
+      const body =
+        document.getElementById('noteBody');
+
       body.focus();
-      const sel = window.getSelection();
+
+      const sel =
+        window.getSelection();
+
       if (sel && sel.rangeCount) {
-        const range = sel.getRangeAt(0);
+
+        const range =
+          sel.getRangeAt(0);
+
         range.deleteContents();
-        const wrap = document.createElement('div');
+
+        const wrap =
+          document.createElement('div');
+
         wrap.innerHTML = html;
-        const frag = document.createDocumentFragment();
-        while (wrap.firstChild) frag.appendChild(wrap.firstChild);
+
+        const frag =
+          document.createDocumentFragment();
+
+        while (wrap.firstChild) {
+          frag.appendChild(wrap.firstChild);
+        }
+
         range.insertNode(frag);
+
       } else {
-        document.execCommand('insertHTML', false, html);
+
+        document.execCommand(
+          'insertHTML',
+          false,
+          html
+        );
       }
     }
 
     document.addEventListener('click', e => {
-      if (!e.target.closest('#moreBtn') && !e.target.closest('#moreDropdown')) closeDropdown();
-    });
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeModal(); closeDropdown(); }
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-        e.preventDefault();
-        saveNotes(true);
+      if (
+        !e.target.closest('#moreBtn') &&
+        !e.target.closest('#moreDropdown')
+      ) {
+        closeDropdown();
       }
     });
 
+    document.addEventListener('keydown', e => {
+
+      if (e.key === 'Escape') {
+        closeModal();
+        closeDropdown();
+      }
+
+      /*
+        Ctrl/Cmd + S intentionally does nothing special.
+        Notes are automatically saved.
+      */
+    });
+
     window.addEventListener('beforeunload', () => {
-      if (dirty) saveNotes(false);
+      if (dirty) {
+        saveNotes();
+      }
     });
 
     loadState();
-    if (localStorage.getItem('notes-theme') === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
+
+    if (
+      localStorage.getItem('notes-theme') === 'dark'
+    ) {
+      document.documentElement
+        .setAttribute('data-theme', 'dark');
+
       updateThemeIcon(true);
     }
-    document.documentElement.style.setProperty('--editor-font-size', currentFontSize + 'px');
-    document.getElementById('autoSaveToggle').checked = autoSave;
+
+    document.documentElement.style.setProperty(
+      '--editor-font-size',
+      currentFontSize + 'px'
+    );
+
+    document.getElementById('autoSaveToggle').checked =
+      autoSave;
+
     syncFontInputs(currentFontSize);
+
     renderNotes();
+
     selectNote(activeId);
+
     setSaveStatus('Saved', false);
   </script>
+
 </body>
 </html>
