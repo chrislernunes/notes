@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes — Minimal</title>
 
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2318181b'/%3E%3Cg fill='none' stroke='%23fafafa' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20l4.2-1 10.1-10.1a2.1 2.1 0 0 0-3-3L5.2 16 4 20z'/%3E%3Cpath d='M13.5 7.5l3 3'/%3E%3Cpath d='M7 20h13'/%3E%3C/g%3E%3C/svg%3E">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,6 +14,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
 
   <style>
     :root {
@@ -979,7 +982,7 @@
       <div class="sidebar-header">
         <div class="logo">
 
-          <!-- Inline pen-writing logo -->
+          <!-- Pen-writing logo -->
           <div class="logo-icon">
             <svg viewBox="0 0 24 24" fill="none"
                  stroke="currentColor"
@@ -1068,7 +1071,7 @@
             </svg>
           </button>
 
-          <!-- Three dots — now positioned at the right -->
+          <!-- More options -->
           <button
             class="icon-btn"
             id="moreBtn"
@@ -1139,6 +1142,28 @@
                 <span></span>
               </label>
             </div>
+
+            <div class="dropdown-divider"></div>
+
+            <div class="dropdown-label">Export</div>
+
+            <button class="dropdown-item" onclick="downloadAsPDF()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 3v12"/>
+                <path d="m7 10 5 5 5-5"/>
+                <path d="M5 21h14"/>
+              </svg>
+              Download as PDF
+            </button>
+
+            <button class="dropdown-item" onclick="downloadAsWord()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6"/>
+                <path d="m9 15 1.5 4L12 15l1.5 4L15 15"/>
+              </svg>
+              Download as Word
+            </button>
 
             <div class="dropdown-divider"></div>
 
@@ -1489,10 +1514,7 @@
       }
     }
 
-    /*
-      Auto-save only.
-      There is intentionally no manual save button anymore.
-    */
+    // Auto-save only — there is no manual save button.
     function saveNotes() {
       clearTimeout(saveTimer);
 
@@ -1543,11 +1565,7 @@
 
       document.getElementById('autoSaveToggle').checked = autoSave;
 
-      if (autoSave && dirty) {
-        saveNotes();
-      } else {
-        saveNotes();
-      }
+      saveNotes();
     }
 
     function toggleTheme() {
@@ -1634,13 +1652,17 @@
       return div.innerHTML;
     }
 
+    function sanitizeFilename(name) {
+      const cleaned = (name || 'Untitled note')
+        .replace(/[\\/:*?"<>|]/g, '')
+        .trim();
+
+      return cleaned || 'Untitled note';
+    }
+
     function selectNote(id) {
       if (dirty) {
-        if (autoSave) {
-          saveNotes();
-        } else {
-          saveNotes();
-        }
+        saveNotes();
       }
 
       activeId = id;
@@ -2457,6 +2479,77 @@
       }
     }
 
+    // --- Export: Word (.doc) and PDF ---
+
+    function downloadAsWord() {
+      closeDropdown();
+
+      const note = notes.find(n => n.id === activeId);
+
+      if (!note) return;
+
+      const title = note.title || 'Untitled note';
+
+      const html = `
+        <html xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:w="urn:schemas-microsoft-com:office:word"
+              xmlns="http://www.w3.org/TR/REC-html40">
+        <head>
+          <meta charset="utf-8">
+          <title>${escapeHtml(title)}</title>
+        </head>
+        <body style="font-family:Calibri, Arial, sans-serif; font-size:14px; line-height:1.5;">
+          <h1 style="font-size:22px;">${escapeHtml(title)}</h1>
+          ${note.body}
+        </body>
+        </html>
+      `;
+
+      const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = sanitizeFilename(title) + '.doc';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadAsPDF() {
+      closeDropdown();
+
+      const note = notes.find(n => n.id === activeId);
+
+      if (!note) return;
+
+      if (!window.html2pdf) {
+        alert('PDF export is still loading — please try again in a moment.');
+        return;
+      }
+
+      const title = note.title || 'Untitled note';
+
+      const container = document.createElement('div');
+      container.style.padding = '24px';
+      container.style.fontFamily = "'Inter', Arial, sans-serif";
+      container.style.color = '#18181b';
+      container.style.background = '#ffffff';
+      container.innerHTML = `
+        <h1 style="font-size:22px;margin-bottom:14px;">${escapeHtml(title)}</h1>
+        ${note.body}
+      `;
+
+      window.html2pdf().set({
+        margin: 12,
+        filename: sanitizeFilename(title) + '.pdf',
+        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'pt', format: 'a4' }
+      }).from(container).save();
+    }
+
     document.addEventListener('click', e => {
       if (
         !e.target.closest('#moreBtn') &&
@@ -2467,16 +2560,10 @@
     });
 
     document.addEventListener('keydown', e => {
-
       if (e.key === 'Escape') {
         closeModal();
         closeDropdown();
       }
-
-      /*
-        Ctrl/Cmd + S intentionally does nothing special.
-        Notes are automatically saved.
-      */
     });
 
     window.addEventListener('beforeunload', () => {
